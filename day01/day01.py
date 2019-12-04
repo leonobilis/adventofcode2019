@@ -1,8 +1,5 @@
-from math import floor
-
-
 def fuel(mass):
-    return floor(mass/3) - 2
+    return mass//3 - 2
 
 
 def total_fuel(mass):
