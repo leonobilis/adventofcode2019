@@ -6,7 +6,7 @@ def criteria(password):
 
 
 def p1(start, end):
-    return len([i for i in range(int(start), int(end) + 1) if criteria(str(i))])
+    return len([i for i in range(start, end + 1) if criteria(str(i))])
 
 
 def criteria2(password):
@@ -15,10 +15,10 @@ def criteria2(password):
 
 
 def p2(start, end):
-    return len([i for i in range(int(start), int(end) + 1) if criteria2(str(i))])
+    return len([i for i in range(start, end + 1) if criteria2(str(i))])
 
 
 if __name__ == "__main__":
-    _range = ('123257', '647015')
+    _range = (123257, 647015)
     print("Part 1: {}".format(p1(*_range)))
     print("Part 2: {}".format(p2(*_range)))
