@@ -38,5 +38,5 @@ def p2(input):
 if __name__ == "__main__":
     with open('input.txt', "r") as f:
         inp = parse_input(f.readline())
-        print("Part 1: {}".format(p1(inp)))
-        print("Part 2: {}".format(p2(inp)))
+        print(f"Part 1: {p1(inp)}")
+        print(f"Part 2: {p2(inp)}")

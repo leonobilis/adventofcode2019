@@ -20,5 +20,5 @@ def p2(start, end):
 
 if __name__ == "__main__":
     _range = (123257, 647015)
-    print("Part 1: {}".format(p1(*_range)))
-    print("Part 2: {}".format(p2(*_range)))
+    print(f"Part 1: {p1(*_range)}")
+    print(f"Part 2: {p2(*_range)}")

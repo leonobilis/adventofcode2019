@@ -52,5 +52,5 @@ def p2(wire1_paths, wire2_paths):
 if __name__ == "__main__":
     with open('input.txt', "r") as f:
         inp = parse_input(f.readlines())
-        print("Part 1: {}".format(p1(*inp)))
-        print("Part 2: {}".format(p2(*inp)))
+        print(f"Part 1: {p1(*inp)}")
+        print(f"Part 2: {p2(*inp)}")
