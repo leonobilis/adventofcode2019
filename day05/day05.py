@@ -27,7 +27,7 @@ def run(prog, input):
     def jump_false(a, b, pos):
         return b if not a else pos + 3
 
-    def jless_than(a, b, c, pos):
+    def less_than(a, b, c, pos):
         prog[c] = 1 if a < b else 0
         return pos + 4
 
@@ -55,10 +55,10 @@ def run(prog, input):
         106: lambda a, b, _c, pos: jump_false(a, prog[b], pos),
         1006: lambda a, b, _c, pos: jump_false(prog[a], b, pos),
         1106: lambda a, b, _c, pos: jump_false(a, b, pos),
-        7: lambda a, b, c, pos: jless_than(prog[a], prog[b], c, pos),
-        107: lambda a, b, c, pos: jless_than(a, prog[b], c, pos),
-        1007: lambda a, b, c, pos: jless_than(prog[a], b, c, pos),
-        1107: lambda a, b, c, pos: jless_than(a, b, c, pos),
+        7: lambda a, b, c, pos: less_than(prog[a], prog[b], c, pos),
+        107: lambda a, b, c, pos: less_than(a, prog[b], c, pos),
+        1007: lambda a, b, c, pos: less_than(prog[a], b, c, pos),
+        1107: lambda a, b, c, pos: less_than(a, b, c, pos),
         8: lambda a, b, c, pos: equals(prog[a], prog[b], c, pos),
         108: lambda a, b, c, pos: equals(a, prog[b], c, pos),
         1008: lambda a, b, c, pos: equals(prog[a], b, c, pos),
