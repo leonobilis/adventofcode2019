@@ -67,7 +67,6 @@ def run(prog, input):
     pos = 0
     while prog[pos] != 99:
         pos = opcode[prog[pos]](prog[pos + 1], prog[pos + 2], prog[pos + 3], pos)
-    out(prog[pos + 1], pos)
     return output
 
 
