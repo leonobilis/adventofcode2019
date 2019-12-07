@@ -83,11 +83,9 @@ def p1(program):
 def p2(program):
     program.extend([99, 99])
     def to_thrusters(phases):
-        amplifiers = [[program.copy(), 0] for _ in range(5)]
+        amplifiers = [program.copy() for _ in range(5)]
+        amplifiers = [list(i) for i in zip(amplifiers, [run(amplifiers[i], input=[phase])[1] for i, phase in enumerate(phases)])]
         signal = 0
-        for i, phase in enumerate(phases):
-            s, amplifiers[i][1] = run(amplifiers[i][0], input=[signal, phase], pos=amplifiers[i][1])
-            signal = s.pop()
         while amplifiers[-1][0][amplifiers[-1][1]] != 99:
             for amp in amplifiers:
                 s, amp[1] = run(amp[0], input=[signal], pos=amp[1])
