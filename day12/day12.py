@@ -4,7 +4,6 @@ from math import gcd
 from functools import reduce
 
 
-#Point = namedtuple('Point', ['x', 'y', 'z'])
 Moon = namedtuple('Moon', ['pos', 'vel'])
 
 
@@ -36,6 +35,7 @@ def kinetic_energy(moon):
 
 
 def p1(moons):
+    moons = [Moon(pos=m.pos.copy(), vel=m.vel.copy()) for m in moons]
     for _ in range(1000):
         [apply_gravity(i, j) for j in moons for i in moons if i != j]
         [apply_velocity(moon) for moon in moons]
@@ -47,30 +47,22 @@ def lcm(vals):
 
 
 def p2(moons):
-    return 0
     i = 0
-    cyclex = 0
-    cycley = 0
-    cyclez = 0
-    #first_match = {}
-    # [apply_gravity(i, j) for j in moons for i in moons if i != j]
-    # [apply_velocity(moon) for moon in moons]
-    #initial_pos = [m.pos.copy() for m in moons]
-    # second_vel = [m.vel.copy() for m in moons]
-    while not (cyclex and cycley and cyclez):
-        #initial_pos = [m.pos.copy() for m in moons]
+    cycle = {}
+    initial = [[m.pos[j] for m in moons] for j in range(3)]
+    while len(cycle) != 3:
         [apply_gravity(i, j) for j in moons for i in moons if i != j]
         [apply_velocity(moon) for moon in moons]
         i += 1
-        x, y, z = [[m.vel[i] for m in moons] for i in range(3)]
-        cyclex = i if not any(x) else 0
-        cycley = i if not any(y) else 0
-        cyclez = i if not any(z) else 0
-    return lcm([cyclex, cycley, cyclez])
+        for j in range(3):
+            if j not in cycle and not any([m.vel[j] for m in moons]) and [m.pos[j] for m in moons] == initial[j]:
+                cycle[j] = i
+    result = lcm(cycle.values())
+    return result
 
 
 if __name__ == "__main__":
     with open('input.txt', "r") as f:
         inp = parse_input(f.readlines())
-        print(f"Part 1: {p1(inp.copy())}")
-        print(f"Part 2: {p2(inp.copy())}")
+        print(f"Part 1: {p1(inp)}")
+        print(f"Part 2: {p2(inp)}")
