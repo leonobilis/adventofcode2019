@@ -1,5 +1,4 @@
-from itertools import takewhile
-from enum import IntEnum
+from itertools import product
 
 
 def parse_input(input):
@@ -96,36 +95,37 @@ def run(prog, input, pos=0, rb_val=0):
 
 
 def p1(program):
-    return 0
     program = program.copy()
-    program.extend([0]*100)
-    inp = []
-    o = []
-    for x in range(100):
-        for y in range(100):
-            out, *_ = run(program.copy(), input=[y,x])
-            o.extend(out)
-    return sum(o)
+    program.extend([0]*50)
+    out = [run(program.copy(), input=[y,x]) for y in range(50) for x in range(50)]
+    return sum([o[0][0] for o in out])
+
+
+def get_last_x(y, program):
+    x =  y - ((y-4)//7 + (y+6)//7) - 1
+    while get_intcode(x, y, program):
+        x += 1
+    return x - 1
+
+
+def get_intcode(x, y, program):
+    out, *_ = run(program.copy(), input=[y,x])
+    return out[0]
+
+
+def check100(y, program):
+    x = get_last_x(y, program)
+    return get_intcode(x - 99, y + 99, program) and not get_intcode(x - 100, y + 99, program)
 
 
 def p2(program):
     program = program.copy()
-    program.extend([0]*100)
-    inp = []
-    o = []
-    for y in range(100):
-        line = []
-        for x in range(100):
-            out, *_ = run(program.copy(), input=[y,x])
-            line.extend(out)
-        o.append("".join(['#' if l else '.' for l in line]))
-    
-    for i, line in enumerate(o):
-        print(line)
-
-    for i, line in enumerate(o):
-        print(f"y={i}: x={line.find('#')}, count={line.count('#')}")
-    return 0
+    program.extend([0]*50)
+    y = 1000
+    while True:
+        if check100(y, program):
+            return 10000*(get_last_x(y, program) - 99) + y
+        y+=1
 
 
 if __name__ == "__main__":
