@@ -11,11 +11,8 @@ def p1(program):
 
 
 def p2(program):
-    #inp = [ord(i) for i in "NOT E T\nNOT T T\nOR H T\nAND D T\nNOT T T\nNOT T J\nRUN\n"]
-    inp = [ord(i) for i in "NOT A T\nNOT T T\nAND C T\nAND I T\nNOT T T\nAND D T\nNOT T T\nNOT T J\nRUN\n"]
-    out = Intcode(program).run(inp)
-    print("".join([chr(i) for i in out]))
-    return out[-1]
+    inp = [ord(i) for i in "NOT E T\nNOT T T\nOR H T\nAND D T\nNOT T J\nNOT J J\nNOT C T\nNOT T T\nAND B T\nNOT T T\nAND T J\nNOT A T\nOR T J\nRUN\n"]
+    return Intcode(program).run(inp)[-1]
 
 
 if __name__ == "__main__":
